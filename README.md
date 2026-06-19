@@ -80,4 +80,4 @@ The intensive culminated in a **Capstone Project** simulating a multi-agent ecos
 *   *My official course completion badge is located in [day-5/screenshots/](./day-5/screenshots/).*
 
 ---
-*Created by [Your Name](https://github.com/your-username) as a portfolio highlight for Applied AI & Agentic Software Engineering roles.*
+*Created by [Your Name](https://github.com/pratapashanmukhi) as a portfolio highlight for Applied AI & Agentic Software Engineering roles.*
