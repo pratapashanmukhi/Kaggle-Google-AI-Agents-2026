@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Agent Interface - Kaggle x Google Intensive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navbar -->
+        <header class="app-header">
+            <div class="brand">
+                <div class="logo-icon"></div>
+                <h1>ExpenseAgent<span>.ai</span></h1>
+            </div>
+            <div class="status-badge">
+                <span class="pulse-indicator"></span>
+                Connected to Cloud Run (Google Cloud)
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Left Panel: Submission & Budget Status -->
+            <section class="left-panel">
+                <!-- Budget Overview Card -->
+                <div class="glass-card budget-card">
+                    <h2>Department Budget Tracker</h2>
+                    <div class="budget-stats">
+                        <div class="stat-item">
+                            <span class="label">Total Budget</span>
+                            <span class="value">$1,000.00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="label">Remaining Balance</span>
+                            <span class="value remaining" id="budget-balance">$454.50</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="budget-progress" style="width: 45.45%;"></div>
+                    </div>
+                </div>
+
+                <!-- Expense Form Card -->
+                <div class="glass-card form-card">
+                    <h2>Submit New Expense</h2>
+                    <form id="expense-form">
+                        <div class="form-group">
+                            <label for="merchant">Merchant Name</label>
+                            <input type="text" id="merchant" placeholder="e.g., Google Cloud, Uber, AWS" required>
+                        </div>
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label for="amount">Amount (USD)</label>
+                                <input type="number" id="amount" step="0.01" min="0.1" placeholder="0.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category">
+                                    <label>Category</label>
+                                    <option value="Software/SaaS">Software/SaaS</option>
+                                    <option value="Travel">Travel</option>
+                                    <option value="Meals">Meals</option>
+                                    <option value="Hardware">Hardware</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="receipt">Upload Receipt Image</label>
+                            <div class="file-dropzone" id="dropzone">
+                                <span class="upload-icon">📂</span>
+                                <span class="dropzone-text">Click to choose or drop receipt image</span>
+                                <input type="file" id="receipt" accept="image/*" style="display: none;">
+                                <div class="file-preview-name" id="file-name"></div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" id="btn-submit">
+                            Submit to Cloud Agent
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right Panel: Agent Tracing & Simulation Logs -->
+            <section class="right-panel">
+                <div class="glass-card trace-card">
+                    <div class="trace-header">
+                        <h2>Agentic Reasoning Trace (Cloud Run)</h2>
+                        <span class="sdk-version">ADK v1.4.2</span>
+                    </div>
+
+                    <div class="trace-console" id="trace-console">
+                        <div class="console-placeholder">
+                            <div class="robot-animation">🤖</div>
+                            <p>Awaiting expense submission...</p>
+                            <span>Submit an expense to watch the autonomous Agent reasoning loop, tool execution (MCP), and budget evaluation.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transaction Log Card -->
+                <div class="glass-card transactions-card">
+                    <h2>Processed Transactions</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Merchant</th>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-rows">
+                                <tr>
+                                    <td>Vertex AI Compute</td>
+                                    <td>Software/SaaS</td>
+                                    <td>$500.00</td>
+                                    <td><span class="status APPROVED">Approved</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Engineering Team Lunch</td>
+                                    <td>Meals</td>
+                                    <td>$45.50</td>
+                                    <td><span class="status APPROVED">Approved</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
