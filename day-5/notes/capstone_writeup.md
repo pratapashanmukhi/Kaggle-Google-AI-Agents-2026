@@ -93,6 +93,37 @@ Harvested Crop Yield: 45 units
 
 ---
 
+# Capstone Project: Multi-Agent Kaggriculture Simulation & Conformance Suite
+
+This project serves as my submission for the Kaggle × Google 5-Day AI Agents Intensive Course. It demonstrates a complete multi-agent coordination simulation, spec-driven development using Gherkin syntax, and automated conformance testing.
+
+### 🔗 Code Repository
+* Code & Specs: https://github.com/pratapashanmukhi/Kaggle-Google-AI-Agents-2026
+
+---
+
+### 🏗️ Agentic Architecture
+My system implements a simulated farming ecosystem (Kaggriculture) consisting of three specialized, coordinating agents:
+1. **WeatherAgent:** Evaluates and forecasts multi-day weather conditions (predicting rains, sunny intervals, etc.).
+2. **SupplyAgent:** Audits resources, verifying seed inventory and water levels before planting.
+3. **FarmerAgent (Orchestrator):** Synthesizes weather reports and resource audits to execute crop planning, irrigation schedules, and harvesting steps.
+
+---
+
+### 🎯 Spec-Driven Development & Testing
+To ensure reliability and deterministic outcomes in an agentic loop:
+* I wrote Gherkin Specifications defining standard operating rules (e.g., budget bounds and tool usage).
+* I implemented a Python `unittest` conformance runner to programmatically assert agent behavior against Gherkin criteria.
+
+---
+
+### 📊 Verified Simulation Console Logs
+The simulation successfully processes through a complete cycle:
+* Day 1: Weather forecast and inventory verification succeed, trigger-planting 20 units of Wheat.
+* Day 2: Environment advances; rainwater increases soil moisture; irrigation is set to standby.
+* Day 3: Crops reach maturity, and the FarmerAgent triggers the harvest tool.
+* Result: Harvested crop yield of 45 units.
+
 ## 💡 Key Learnings & Takeaways
 1.  **Modular Tool Design:** Using Model Context Protocol (MCP) design principles keeps tools decoupleable from the core reasoning loop.
 2.  **State Safety:** Incorporating strict environmental response returns prevents agents from guessing outcomes or falling into infinite action loops.
