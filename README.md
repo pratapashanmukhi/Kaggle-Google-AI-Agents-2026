@@ -1,83 +1,109 @@
-# Kaggle × Google: 5-Day AI Agents Intensive (2026)
+# Multi-Agent Kaggriculture Simulation & SDD Conformance Suite
+### Kaggle × Google 5-Day AI Agents Intensive Capstone Submission (June 2026)
 
-Welcome to my learning journey repository for the **Kaggle × Google 5-Day AI Agents Intensive Course (June 2026)**. This repository documents my exploration, notes, hands-on codelabs, and custom agent implementations developed throughout this program.
+This repository documents my learning journey and final Capstone Project for the **5-Day AI Agents: Intensive Vibe Coding Course with Google**. 
 
-The goal of this repository is to demonstrate a production-ready, spec-driven understanding of autonomous AI agents, tool interoperability, context engineering, evaluation, and security—ideal for internships and placement portfolios.
-
----
-
-## 📋 Course Overview
-This intensive course, co-developed by Kaggle and Google, focuses on shifting from simple chatbots to autonomous, tool-enabled AI agents. It details how to design, test, secure, and deploy agentic systems at scale using state-of-the-art architectures and technologies.
-
-| Day | Focus Area | Key Technologies & Concepts |
-|---|---|---|
-| **[Day 1](./day-1/README.md)** | Introduction to Agents & Vibe Coding | Agentic Taxonomies, Vibe Coding, Agent Ops, Gemini Pro |
-| **[Day 2](./day-2/README.md)** | Agent Tools & Interoperability | Model Context Protocol (MCP), Tool Calling, Custom API Integration |
-| **[Day 3](./day-3/README.md)** | Agent Skills & Context Engineering | Context Window Management, Memory Architectures, `SKILL.md` Specs |
-| **[Day 4](./day-4/README.md)** | Agent Quality, Security & Evaluation | Evals (LLM-as-a-judge), Prompt Guardrails, Sandboxing, Human-in-the-Loop |
-| **[Day 5](./day-5/README.md)** | Production Grade Dev & Capstone | Spec-Driven Dev, Observability, Multi-Agent Simulation |
+It implements a cooperative multi-agent farming simulation environment (**Kaggriculture**) and a **Spec-Driven Development (SDD)** conformance testing suite.
 
 ---
 
-## 🗂️ Repository Structure
+## 🏗️ System Architecture & Flow
 
-This repository is structured systematically to separate core learnings, code implementations, and visual execution traces:
+The repository implements a decentralized coordination loop containing three specialized agents and a stateful environment runner:
 
-```text
-kaggle-ai-agents-intensive/
-├── README.md                   # Main repository overview (this file)
-├── day-1/
-│   ├── README.md               # Intro to Agents, Vibe Coding, & Agent Ops
-│   ├── code/                   # Codelabs & starter scripts
-│   ├── notes/                  # Detailed conceptual study notes
-│   └── screenshots/            # Console outputs and execution traces
-├── day-2/
-│   ├── README.md               # Model Context Protocol (MCP) & Tools
-│   ├── code/                   # Custom MCP Server & tool calling scripts
-│   ├── notes/                  # MCP protocol specs & design patterns
-│   └── screenshots/            # MCP tool discovery & invocation logs
-├── day-3/
-│   ├── README.md               # Context Engineering & Agent Skills
-│   ├── code/                   # Skills definitions and memory store setup
-│   ├── notes/                  # Context rot & memory management strategies
-│   └── screenshots/            # Context flow & skill matching traces
-├── day-4/
-│   ├── README.md               # Quality, Security & Evals
-│   ├── code/                   # Assertions, eval test cases, & sandboxing scripts
-│   ├── notes/                  # Prompt injection mitigation & LLM-as-a-judge
-│   └── screenshots/            # Eval reports & security block logs
-└── day-5/
-    ├── README.md               # Spec-Driven Production & Capstone
-    ├── code/                   # Capstone simulation / Multi-agent setup
-    ├── notes/                  # Production observability & governance
-    └── screenshots/            # Multi-agent simulation logs & completion badge
+```mermaid
+graph TD
+    User([User / Trigger]) --> Farmer[FarmerAgent <br> Orchestrator]
+    
+    subgraph Agents [Coordinating Agents]
+        Farmer <-->|1. Forecast Request| Weather[WeatherAgent]
+        Farmer <-->|2. Inventory Check| Supply[SupplyAgent]
+    end
+
+    subgraph Platform [Execution Environment]
+        Farmer -->|3. Plant / Harvest Action| Env[Simulation Environment]
+        Env -->|4. Update State| State[(Farm State Database)]
+    end
+    
+    style Farmer fill:#3b82f6,stroke:#1e3a8a,stroke-width:2px,color:#fff
+    style Weather fill:#8b5cf6,stroke:#4c1d95,stroke-width:2px,color:#fff
+    style Supply fill:#10b981,stroke:#064e3b,stroke-width:2px,color:#fff
+    style Env fill:#f59e0b,stroke:#78350f,stroke-width:2px,color:#fff
 ```
 
 ---
 
-## 🛠️ Tech Stack & Key Frameworks
-*   **LLMs:** Google Gemini 1.5 Pro / 1.5 Flash (via Vertex AI & Google AI Studio)
-*   **Protocol:** Model Context Protocol (MCP) by Anthropic/Google
-*   **Frameworks:** Agent Development Kit (ADK), LangChain/LlamaIndex (conceptual)
-*   **Observability:** OpenTelemetry, Arize Phoenix / Langfuse (conceptual tracing)
-*   **Testing & Evals:** Python `unittest`/`pytest`, custom LLM-as-a-judge prompts
+## 🎯 Course Concepts Demonstrated (6/6 Pillars)
+
+This project implements all core themes taught during the Google Intensive:
+
+1.  **Multi-Agent Coordination (Day 1 / Day 5):** Cooperative loops in [`day-5/code/capstone_simulation.py`](./day-5/code/capstone_simulation.py) where the `FarmerAgent` orchestrates inputs from the `WeatherAgent` and `SupplyAgent` to manage crops.
+2.  **Model Context Protocol (MCP) Tools (Day 2):** Architecture for decoupling server tools and host client queries in [`day-2/code/mcp_server.py`](./day-2/code/mcp_server.py).
+3.  **Context & Agent Skills (Day 3):** Standardized, discoverable instructions via [`day-3/code/skills/data_cleansing_skill.md`](./day-3/code/skills/data_cleansing_skill.md).
+4.  **Observability & Tracing (Day 4):** Latency and prompt tracing setup in [`day-4/code/eval_suite.py`](./day-4/code/eval_suite.py).
+5.  **Security Guardrails (Day 4):** Execution sandboxing in [`day-4/code/sandbox_runner.py`](./day-4/code/sandbox_runner.py).
+6.  **Spec-Driven Development (Day 5):** Validating agent behaviors against declarative Gherkin specs ([`expense_agent_spec.feature`](./day-5/code/expense_agent_spec.feature)) using a Python conformance runner ([`test_agent_conformance.py`](./day-5/code/test_agent_conformance.py)).
 
 ---
 
-## 🚀 Key Takeaways
-1.  **Autonomous Agent Architectures:** Transitioned from single-shot prompts to loop-based reasoning (Act-Observe-Plan).
-2.  **Tool-Driven Interoperability:** Implemented MCP to decouple agent execution from client applications, creating extensible tool servers.
-3.  **Context & Memory Hygiene:** Solved "context rot" by creating sliding window memory and persistent vector search stores.
-4.  **Production Evals:** Learned that agents must be evaluated programmatically using programmatic assertions and LLM judges.
-5.  **Secure Workflows:** Designed systems with sandboxed code execution environments and strict guardrails to resist prompt injection attacks.
+## 📂 Repository Directory Map
+
+```text
+Kaggle-Google-AI-Agents-2026/
+├── README.md                   # Core documentation (this file)
+├── day-1/
+│   ├── README.md               # Shifting from chatbots to autonomous loops
+│   └── code/                   # Simple agent loops
+├── day-2/
+│   ├── README.md               # Model Context Protocol (MCP) tool design
+│   └── code/                   # mcp_server.py & client verification scripts
+├── day-3/
+│   ├── README.md               # Memory storage & context engineering
+│   └── code/                   # custom skill templates & context pruners
+├── day-4/
+│   ├── README.md               # Evaluation frameworks & guardrails
+│   └── code/                   # Sandbox execution & input sanitizer scripts
+└── day-5/
+    ├── README.md               # Prototype to Production lifecycle
+    ├── code/
+    │   ├── capstone_simulation.py      # Kaggriculture Multi-Agent loop
+    │   ├── expense_agent_spec.feature # Gherkin behavior specifications
+    │   ├── test_agent_conformance.py  # Conformance test validation runner
+    │   ├── deploy_reasoning_engine.py # Vertex AI Reasoning Engine deploy script
+    │   └── frontend-app/              # Glassmorphic client app (HTML/CSS/JS)
+    └── notes/
+        ├── capstone_writeup.md        # Formatted Kaggle submission writeup
+        └── gcp_setup_guide.md         # GCP SDK & API enablement guide
+```
 
 ---
 
-## 🎓 Completion
-The intensive culminated in a **Capstone Project** simulating a multi-agent ecosystem (representing complex task planning, resource trading, and environment interaction). 
+## ⚡ Setup & Installation
 
-*   *Check out the [Day 5 Capstone Write-up](./day-5/README.md) for details.*
-*   *My official course completion badge is located in [day-5/screenshots/](./day-5/screenshots/).*
+Follow these steps to run the simulation and verification suites locally:
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/pratapashanmukhi/Kaggle-Google-AI-Agents-2026.git
+cd Kaggle-Google-AI-Agents-2026
+```
+
+### 2. Run the Capstone Multi-Agent Simulation
+No cloud billing configuration is required to execute the mock environment simulator locally:
+```bash
+python day-5/code/capstone_simulation.py
+```
+*This outputs the step-by-step reasoning thought loops, tool requests, and state changes of the agents.*
+
+### 3. Run the Spec Conformance Suite
+Verify that the system complies with Gherkin specification rules:
+```bash
+python day-5/code/test_agent_conformance.py
+```
+
+### 4. Open the Observability Frontend App
+Double-click the HTML file to run the interactive dashboard in your browser:
+*   [`day-5/code/frontend-app/index.html`](./day-5/code/frontend-app/index.html)
 
 ---
-*Created by [Your Name](https://github.com/pratapashanmukhi) as a portfolio highlight for Applied AI & Agentic Software Engineering roles.*
+*Developed for the Google Cloud & Kaggle Intensive. Code template provided for Placement Portfolios.*
