@@ -1,0 +1,9 @@
+{
+  "name": "kaggle-google-ai-agents-2026",
+  "version": "1.0.0",
+  "description": "Kaggle × Google 5-Day AI Agents Intensive Course Portfolio.",
+  "scripts": {
+    "dev": "npx -y serve day-5/code/frontend-app"
+  },
+  "license": "CC-BY-4.0"
+}
